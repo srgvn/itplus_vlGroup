@@ -30,8 +30,8 @@ public class MainCharacterController : MonoBehaviour {
 	}
 
 	void LoadAnimation(int skinActive) {
-		if (skinActive == 1) {
-			this.gameObject.transform.GetChild(0).GetComponent<Animator>().
-		}
+//		if (skinActive == 1) {
+//			this.gameObject.transform.GetChild(0).GetComponent<Animator>().
+//		}
 	}
 }

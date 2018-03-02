@@ -38,7 +38,6 @@ public class JumpButtonController : MonoBehaviour {
 			animator.SetBool ("isJumpBwd", true);
 			animator.SetBool ("isJump", false);
 		}
-			animator.SetBool ("isIdle", false);
 	}
 
 	public void OnMouseUp (){

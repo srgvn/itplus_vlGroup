@@ -16,7 +16,7 @@ public class MoveButtonController : MonoBehaviour {
 		
 	}
 
-	public void OnMouseDown () {
+	public void OnMouseOver () {
 		if (buttonClicked == 1) {
 			animator.SetBool ("isIdle", false);
 			animator.SetBool ("isRunFwd", false);
@@ -28,10 +28,9 @@ public class MoveButtonController : MonoBehaviour {
 			animator.SetBool ("isJumpBwd", false);
 			animator.SetBool ("isRunFwd", true);
 		}
-		Debug.Log (buttonClicked);
 	}
 
-	public void OnMouseUp (){
+	public void OnMouseExit (){
 		animator.SetBool ("isIdle", true);
 		animator.SetBool ("isRunFwd", false);
 		animator.SetBool ("isJumpFwd", false);

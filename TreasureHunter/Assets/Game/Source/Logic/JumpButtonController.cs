@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpButtonController : MonoBehaviour {
-
+	public Vector2 jumpForce;
 	private Animator animator;
 	// Use this for initialization
 	void Start () {
@@ -38,6 +38,7 @@ public class JumpButtonController : MonoBehaviour {
 			animator.SetBool ("isJumpBwd", true);
 			animator.SetBool ("isJump", false);
 		}
+		MainCharacterController.MainCtrl.gameObject.GetComponent<Rigidbody2D> ().AddForce (jumpForce);
 	}
 
 	public void OnMouseUp (){

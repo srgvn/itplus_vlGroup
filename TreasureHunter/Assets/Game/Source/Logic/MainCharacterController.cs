@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainCharacterController : MonoBehaviour {
 
 	public int skinActive;
+	public bool isJumping = false;
 	private static MainCharacterController _mainCtrl;
 	public static MainCharacterController MainCtrl {
 		get { 

@@ -39,6 +39,7 @@ public class JumpButtonController : MonoBehaviour {
 			animator.SetBool ("isJump", false);
 		}
 		MainCharacterController.MainCtrl.gameObject.GetComponent<Rigidbody2D> ().AddForce (jumpForce);
+		MainCharacterController.MainCtrl.isJumping = true;
 	}
 
 	public void OnMouseUp (){
@@ -48,5 +49,6 @@ public class JumpButtonController : MonoBehaviour {
 		animator.SetBool ("isRunBwd", false);
 		animator.SetBool ("isJumpBwd", false);
 		animator.SetBool ("isJump", false);
+		MainCharacterController.MainCtrl.isJumping = false;
 	}
 }

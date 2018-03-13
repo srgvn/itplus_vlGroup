@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainCharacterController : MonoBehaviour {
 
 	public int skinActive;
-	public bool isJumping = false;
+	public bool isJumping;
 	private static MainCharacterController _mainCtrl;
 	public static MainCharacterController MainCtrl {
 		get { 
@@ -34,5 +34,23 @@ public class MainCharacterController : MonoBehaviour {
 //		if (skinActive == 1) {
 //			this.gameObject.transform.GetChild(0).GetComponent<Animator>().
 //		}
+	}
+
+	void OnCollisionEnter2D(Collision2D col){
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals ("Ground")) {
+			isJumping = false;
+		} else {
+			isJumping = true;
+		}
+		Debug.Log (tagName + " " + isJumping);
+	}
+
+	void OnCollisionExit2D(Collision2D col) {
+//		string tagName = col.gameObject.tag;
+//		if (tagName.Equals("Ground")){
+//			isJumping = true;
+//		}
+//		Debug.Log (tagName + " " + isJumping);
 	}
 }

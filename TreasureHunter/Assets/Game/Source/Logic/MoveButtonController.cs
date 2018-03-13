@@ -18,7 +18,7 @@ public class MoveButtonController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*if (Input.GetKey (KeyCode.LeftArrow) && !MainCharacterController.MainCtrl.isJumping) {
+		if (Input.GetKey (KeyCode.LeftArrow) && !MainCharacterController.MainCtrl.isJumping) {
 			animator.SetBool ("isIdle", false);
 			animator.SetBool ("isRunFwd", false);
 			animator.SetBool ("isJumpFwd", false);
@@ -36,7 +36,6 @@ public class MoveButtonController : MonoBehaviour {
 			animator.SetBool ("isJumpFwd", false);
 			animator.SetBool ("isRunBwd", false);
 		}
-*/
 	}
 
 	public void OnMouseOver () {

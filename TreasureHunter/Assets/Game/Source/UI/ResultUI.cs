@@ -1,16 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class ResultUI : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	static ResultUI _instance;
+	public static ResultUI instance{	
+		get{ 
+			return _instance;
+		}
+	}
+	void Awake(){
+		if (_instance != null) {
+			Destroy (this.gameObject);
+		}
+		_instance = this;	
+	}
+	public Button BtnHome;
+	public Button BtnPlay;
+	public Button BtnRestart;
+	public Button BtnShare;
+	public Button BtnExit;
+	public Text ResultText;
+	public Image WinCrown;
+	public Image FailCrown;
+
+
+	public void ShowWinResult(){
+		BtnPlay.interactable = false;
+		FailCrown.gameObject.SetActive (false);
+
+		ResultText.text = "WIN";
+
+	}
+
+	public void ShowFailedResult(){
+		FailCrown.gameObject.SetActive (true);
+		ResultText.text = "FAILED";
+	}
+
+	public void ButtonHome(){
+		UIController.instance.ShowHomeUI ();
+	}
+
+	public void ButtonRestart(){
+		SceneManager.LoadScene ("GameScene");
+	}
+	public void ButtonShare(){
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public void ButtonExit(){
+		Application.Quit ();
 	}
 }

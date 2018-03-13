@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HomeController : MonoBehaviour {
+public class HomeUI : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	static HomeUI _instance;
+	public static HomeUI instance{	
+		get{ 
+			return _instance;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void Awake(){
+		if (_instance != null) {
+			Destroy (this.gameObject);
+		}
+		_instance = this;	
 	}
+	public Button BtnStart;
+	public void StartGame(){
+		UIController.instance.ShowGameUI ();
+	}
+
 }

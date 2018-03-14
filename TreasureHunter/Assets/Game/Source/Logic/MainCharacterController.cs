@@ -35,22 +35,24 @@ public class MainCharacterController : MonoBehaviour {
 //			this.gameObject.transform.GetChild(0).GetComponent<Animator>().
 //		}
 	}
-
+	private bool temp;
 	void OnCollisionEnter2D(Collision2D col){
 		string tagName = col.gameObject.tag;
 		if (tagName.Equals ("Ground")) {
 			isJumping = false;
-		} else {
-			isJumping = true;
 		}
-		Debug.Log (tagName + " " + isJumping);
 	}
 
 	void OnCollisionExit2D(Collision2D col) {
-//		string tagName = col.gameObject.tag;
-//		if (tagName.Equals("Ground")){
-//			isJumping = true;
-//		}
-//		Debug.Log (tagName + " " + isJumping);
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals("Ground")) {
+			isJumping = true;
+		}
+	}
+	void OnCollisionStay2D(Collision2D col) {
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals ("Ground")) {
+			isJumping = false;
+		}
 	}
 }

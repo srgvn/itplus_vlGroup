@@ -27,6 +27,17 @@ public class ResultUI : MonoBehaviour {
 	public Image WinCrown;
 	public Image FailCrown;
 
+	public Image Keys;
+	public Text PointKeys;
+	public Text AllKeys;
+
+	public Image Coin;
+	public Text TCoin;
+
+
+	public Image Skull;
+	public Text PointSkull;
+	public Text SkullKill;
 
 	public void ShowWinResult(){
 		BtnPlay.interactable = false;

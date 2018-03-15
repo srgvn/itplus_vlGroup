@@ -8,57 +8,57 @@ public class MoveButtonController : MonoBehaviour {
 	public int buttonClicked;
 	private GameObject mainCharacter;
 	private Animator animator;
+	private bool facingRight;
 
 	// Use this for initialization
 	void Start () {
 		mainCharacter = MainCharacterController.MainCtrl.gameObject;
 		animator = mainCharacter.GetComponent<Animator> ();
-		runningSpeed = new Vector2 (3, 0);
+		runningSpeed = new Vector2 (2, 0);
+		facingRight = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.LeftArrow) && !MainCharacterController.MainCtrl.isJumping) {
-			animator.SetBool ("isIdle", false);
-			animator.SetBool ("isRunFwd", false);
-			animator.SetBool ("isJumpFwd", false);
-			animator.SetBool ("isRunBwd", true);
-			mainCharacter.transform.Translate (-runningSpeed * Time.deltaTime);
-		} else if (Input.GetKey (KeyCode.RightArrow) && !MainCharacterController.MainCtrl.isJumping) {
-			animator.SetBool ("isIdle", false);
-			animator.SetBool ("isRunBwd", false);
-			animator.SetBool ("isJumpBwd", false);
+		Vector2 scale = mainCharacter.transform.localScale;
+		if (Input.GetKey (KeyCode.LeftArrow)) {
 			animator.SetBool ("isRunFwd", true);
+			animator.SetBool ("isIdle", false);
+			scale.x = (float)-0.5; 
+			mainCharacter.transform.localScale = scale;
+			mainCharacter.transform.Translate (-runningSpeed * Time.deltaTime);
+		} else if (Input.GetKey (KeyCode.RightArrow)) {
+			animator.SetBool ("isRunFwd", true);
+			animator.SetBool ("isIdle", false);
+			scale.x = (float)0.5;
+			mainCharacter.transform.localScale = scale;
 			mainCharacter.transform.Translate (runningSpeed * Time.deltaTime);
 		} else {
 			animator.SetBool ("isIdle", true);
 			animator.SetBool ("isRunFwd", false);
-			animator.SetBool ("isJumpFwd", false);
-			animator.SetBool ("isRunBwd", false);
 		}
 	}
 
 	public void OnMouseOver () {
+		Vector2 scale = mainCharacter.transform.localScale;
 		if (buttonClicked == 1) {
-			animator.SetBool ("isIdle", false);
-			animator.SetBool ("isRunFwd", false);
-			animator.SetBool ("isJumpFwd", false);
-			animator.SetBool ("isRunBwd", true);
-			mainCharacter.transform.Translate(-runningSpeed * Time.deltaTime);
-		} else if (buttonClicked == 2){
-			animator.SetBool ("isIdle", false);
-			animator.SetBool ("isRunBwd", false);
-			animator.SetBool ("isJumpBwd", false);
 			animator.SetBool ("isRunFwd", true);
-			mainCharacter.transform.Translate(runningSpeed * Time.deltaTime);
+			animator.SetBool ("isIdle", false);
+			scale.x = (float)-0.5; 
+			mainCharacter.transform.localScale = scale;
+			mainCharacter.transform.Translate (-runningSpeed * Time.deltaTime);
+		} else if (buttonClicked == 2){
+			animator.SetBool ("isRunFwd", true);
+			animator.SetBool ("isIdle", false);
+			scale.x = (float)0.5;
+			mainCharacter.transform.localScale = scale;
+			mainCharacter.transform.Translate (runningSpeed * Time.deltaTime);
 		}
 	}
 
 	public void OnMouseExit (){
 		animator.SetBool ("isIdle", true);
 		animator.SetBool ("isRunFwd", false);
-		animator.SetBool ("isJumpFwd", false);
-		animator.SetBool ("isRunBwd", false);
 	}
 
 }

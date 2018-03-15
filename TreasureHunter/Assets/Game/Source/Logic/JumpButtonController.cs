@@ -9,36 +9,12 @@ public class JumpButtonController : MonoBehaviour {
 	void Start () {
 		animator = MainCharacterController.MainCtrl.gameObject.GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void OnMouseDown () {
 		if (!MainCharacterController.MainCtrl.isJumping) {
-			if (animator.GetBool ("isIdle")) {
-				animator.SetBool ("isIdle", false);
-				animator.SetBool ("isRunFwd", false);
-				animator.SetBool ("isJumpFwd", false);
-				animator.SetBool ("isRunBwd", false);
-				animator.SetBool ("isJumpBwd", false);
-				animator.SetBool ("isJump", true);
-			} else if (animator.GetBool ("isRunFwd")) {
-				animator.SetBool ("isIdle", false);
-				animator.SetBool ("isRunFwd", false);
-				animator.SetBool ("isJumpFwd", true);
-				animator.SetBool ("isRunBwd", false);
-				animator.SetBool ("isJumpBwd", false);
-				animator.SetBool ("isJump", false);
-			} else if (animator.GetBool ("isRunBwd")) {
-				animator.SetBool ("isIdle", false);
-				animator.SetBool ("isRunFwd", false);
-				animator.SetBool ("isJumpFwd", false);
-				animator.SetBool ("isRunBwd", false);
-				animator.SetBool ("isJumpBwd", true);
-				animator.SetBool ("isJump", false);
-			}
+			animator.SetBool ("isIdle", false);
+			animator.SetBool ("isRunFwd", false);
+			animator.SetBool ("isJump", true);
 			MainCharacterController.MainCtrl.gameObject.GetComponent<Rigidbody2D> ().AddForce (jumpForce);
 		}
 	}
@@ -46,9 +22,6 @@ public class JumpButtonController : MonoBehaviour {
 	public void OnMouseUp (){
 		animator.SetBool ("isIdle", true);
 		animator.SetBool ("isRunFwd", false);
-		animator.SetBool ("isJumpFwd", false);
-		animator.SetBool ("isRunBwd", false);
-		animator.SetBool ("isJumpBwd", false);
 		animator.SetBool ("isJump", false);
 	}
 }

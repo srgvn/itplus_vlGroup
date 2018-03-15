@@ -36,14 +36,14 @@ public class MainCharacterController : MonoBehaviour {
 //		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
-		string tagName = col.gameObject.tag;
-		if (tagName.Equals ("Ground")) {
-			isJumping = false;
-		}
-		Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
-	}
-
+//	void OnCollisionEnter2D(Collision2D col){
+//		string tagName = col.gameObject.tag;
+//		if (tagName.Equals ("Ground")) {
+//			isJumping = false;
+//		}
+//		Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
+//	}
+//
 	void OnCollisionExit2D(Collision2D col) {
 		string tagName = col.gameObject.tag;
 		if (tagName.Equals("Ground")){
@@ -57,6 +57,6 @@ public class MainCharacterController : MonoBehaviour {
 		if (tagName.Equals ("Ground")) {
 			isJumping = false;
 		}
-		Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
+		//Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
 	}
 }

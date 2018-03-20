@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainCharacterController : MonoBehaviour {
 
+	bool isDead;
+	Animator animator;
 	public int skinActive;
 	public bool isJumping = false;
 	private static MainCharacterController _mainCtrl;
@@ -22,7 +24,7 @@ public class MainCharacterController : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		
+		animator = gameObject.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -36,20 +38,24 @@ public class MainCharacterController : MonoBehaviour {
 //		}
 	}
 
-//	void OnCollisionEnter2D(Collision2D col){
-//		string tagName = col.gameObject.tag;
-//		if (tagName.Equals ("Ground")) {
-//			isJumping = false;
-//		}
-//		Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
-//	}
-//
+	void OnCollisionEnter2D(Collision2D col){
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals ("Ground")) {
+			isJumping = false;
+		} else if (tagName.Equals ("BushTrap") || tagName.Equals ("SpikeTrap") || tagName.Equals ("RockTrapDead") || tagName.Equals("Monster")) {
+			isDead = true;
+			animator.SetBool ("isDead", true);
+			animator.SetBool ("isIdle", false);
+			animator.SetBool ("isRunFwd", false);
+			animator.SetBool ("isJump", false);
+		}
+	}
+
 	void OnCollisionExit2D(Collision2D col) {
 		string tagName = col.gameObject.tag;
 		if (tagName.Equals("Ground")){
 			isJumping = true;
 		}
-		Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
 	}
 
 	void OnCollisionStay2D(Collision2D col){
@@ -57,6 +63,16 @@ public class MainCharacterController : MonoBehaviour {
 		if (tagName.Equals ("Ground")) {
 			isJumping = false;
 		}
-		//Debug.Log (col.gameObject.name + " " + tagName + " " + isJumping);
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals ("RockTrapDead") || tagName.Equals("Piranha")) {
+			isDead = true;
+			animator.SetBool ("isDead", true);
+			animator.SetBool ("isIdle", false);
+			animator.SetBool ("isRunFwd", false);
+			animator.SetBool ("isJump", false);
+		}
 	}
 }

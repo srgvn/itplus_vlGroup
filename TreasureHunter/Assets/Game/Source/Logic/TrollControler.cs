@@ -7,6 +7,8 @@ public class TrollControler : MonoBehaviour {
 	public GameObject leftLimit;
 	public GameObject rightLimit;
 
+	public GameObject key;
+
 	bool isLeftLimit;
 	bool isRightLimit;
 	Vector2 runningSpeed;
@@ -27,7 +29,6 @@ public class TrollControler : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col) {
 		Vector2 scaleTemp = gameObject.transform.localScale;
-		Debug.Log (col.gameObject.name);
 		if (col.gameObject.name.Equals (leftLimit.name)) {
 			scaleTemp.x = (float)0.5;
 			isLeftLimit = true;
@@ -36,10 +37,14 @@ public class TrollControler : MonoBehaviour {
 			scaleTemp.x = (float)-0.5;
 			isRightLimit = true;
 			isLeftLimit = false;
-		} else if (col.gameObject.tag.Equals ("SpikeTrap") || col.gameObject.tag.Equals ("RockTrapDead")) {
+		} 
+		gameObject.transform.localScale = scaleTemp;
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		if (col.gameObject.tag.Equals ("SpikeTrap") || col.gameObject.tag.Equals ("RockTrapDead")) {
 			StartCoroutine (TrollDie());
 		}
-		gameObject.transform.localScale = scaleTemp;
 	}
 		
 	IEnumerator TrollDie() {
@@ -47,5 +52,6 @@ public class TrollControler : MonoBehaviour {
 		animator.SetBool ("isDead", true);
 		yield return new WaitForSeconds (2);
 		gameObject.SetActive (false);
+		key.SetActive (true);
 	}
 }

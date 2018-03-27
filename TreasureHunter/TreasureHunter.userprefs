@@ -1,21 +1,39 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Game\Source\Logic\MainCharacterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Game\Source\Logic\BossController.cs">
     <Files>
-      <File FileName="Assets\Game\Source\Logic\MainCharacterController.cs" Line="70" Column="67" />
-      <File FileName="Assets\Game\Source\Logic\MoveButtonController.cs" Line="20" Column="37" />
-      <File FileName="Assets\Game\Source\Logic\JumpButtonController.cs" Line="1" Column="1" />
       <File FileName="Assets\Game\Source\Logic\FallingGroundController.cs" Line="1" Column="1" />
       <File FileName="Assets\Game\Source\Logic\JumpColliderController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Game\Source\Logic\RockTrapController.cs" Line="24" Column="37" />
-      <File FileName="Assets\Game\Source\Logic\GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\RockTrapController.cs" Line="1" Column="1" />
       <File FileName="Assets\Game\Source\Logic\BushTrapController.cs" Line="1" Column="1" />
       <File FileName="Assets\Game\Source\Logic\FallingTrapController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Game\Source\Logic\SpikeTrapController.cs" Line="42" Column="3" />
-      <File FileName="Assets\Game\Source\Logic\PiranhaController.cs" Line="9" Column="58" />
-      <File FileName="Assets\Game\Source\Logic\TrollControler.cs" Line="40" Column="30" />
-      <File FileName="Assets\Game\Source\Logic\SwitchController.cs" Line="14" Column="34" />
+      <File FileName="Assets\Game\Source\Logic\SpikeTrapController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\PiranhaController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\TrollControler.cs" Line="45" Column="3" />
+      <File FileName="Assets\Game\Source\Logic\SwitchController.cs" Line="42" Column="38" />
+      <File FileName="Assets\Game\Source\Logic\JumpButtonController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\MoveButtonController.cs" Line="63" Column="35" />
+      <File FileName="Assets\Game\Source\Logic\MainCharacterController.cs" Line="89" Column="11" />
+      <File FileName="Assets\Game\Source\Logic\CameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\MapController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\MovingGround.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\HiddenObjectController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\SawController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game\Source\Logic\SwitchBossController.cs" Line="38" Column="43" />
+      <File FileName="Assets\Game\Source\Logic\BossController.cs" Line="67" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="TreasureHunter" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

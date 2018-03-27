@@ -11,9 +11,7 @@ public class JumpButtonController : MonoBehaviour {
 	}
 
 	public void OnMouseDown () {
-		Debug.Log ("bbb");
 		if (!MainCharacterController.MainCtrl.isJumping) {
-			Debug.Log ("ccc");
 			animator.SetBool ("isIdle", false);
 			animator.SetBool ("isRunFwd", false);
 			animator.SetBool ("isJump", true);
@@ -22,7 +20,6 @@ public class JumpButtonController : MonoBehaviour {
 	}
 
 	public void OnMouseUp (){
-		Debug.Log ("aaa");
 		animator.SetBool ("isIdle", true);
 		animator.SetBool ("isRunFwd", false);
 		animator.SetBool ("isJump", false);

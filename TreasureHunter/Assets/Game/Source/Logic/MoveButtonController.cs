@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+{
 	private Vector2 runningSpeed;
 	private Vector2 jumpForce;
 	public int buttonClicked;
@@ -14,8 +15,9 @@ public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointer
 	private bool isPointerDown;
 	private float temp = 0;
 	// Use this for initialization
-	void Start () {
-		mainCharacter = MainCharacterController.MainCtrl.gameObject;
+	void Start ()
+	{
+		mainCharacter = GameController.Instance.player;
 		animator = mainCharacter.GetComponent<Animator> ();
 		runningSpeed = new Vector2 (2, 0);
 		jumpForce = new Vector2 (0, 450);
@@ -23,21 +25,27 @@ public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointer
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 //		if (isPointerDown && buttonClicked == 1) {
 //			mainCharacter.transform.Translate (-runningSpeed * Time.deltaTime);
 //		} else if (isPointerDown && buttonClicked == 2) {
 //			mainCharacter.transform.Translate (runningSpeed * Time.deltaTime);
 //		}
 //
-		if (Input.GetKey(KeyCode.LeftArrow)) {
+		if (Input.GetKey (KeyCode.LeftArrow)) {
 			mainCharacter.transform.Translate (-runningSpeed * Time.deltaTime);
-		} else if (Input.GetKey(KeyCode.RightArrow)) {
+			SoundController.instance.PlayRunSound ();
+		} else if (Input.GetKey (KeyCode.RightArrow)) {
 			mainCharacter.transform.Translate (runningSpeed * Time.deltaTime);
+			SoundController.instance.PlayRunSound ();
+		} else {
+			SoundController.instance.runSound.Stop ();
 		}
 	}
 
-	public void OnJumpBtnOnClick() {
+	public void OnJumpBtnOnClick ()
+	{
 		float temp = 0;
 		temp += Time.deltaTime;
 		if (!MainCharacterController.MainCtrl.isJumping) {
@@ -49,10 +57,12 @@ public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointer
 			} else {
 				MainCharacterController.MainCtrl.gameObject.GetComponent<Rigidbody2D> ().AddForce (jumpForce * 2);
 			}
+			SoundController.instance.PlayJumpSound ();
 		}
 	}
 
-	public void OnPointerDown(PointerEventData eventData) {
+	public void OnPointerDown (PointerEventData eventData)
+	{
 		Vector2 scale = mainCharacter.transform.localScale;
 		isPointerDown = true;
 		if (buttonClicked == 1) {
@@ -66,13 +76,16 @@ public class MoveButtonController : MonoBehaviour, IPointerDownHandler, IPointer
 			animator.SetBool ("isJump", false);
 			scale.x = (float)0.3;
 		}
+		SoundController.instance.PlayRunSound ();
 		mainCharacter.transform.localScale = scale;
 	}
 
-	public void OnPointerUp(PointerEventData eventData) {
+	public void OnPointerUp (PointerEventData eventData)
+	{
 		isPointerDown = false;
 		animator.SetBool ("isIdle", true);
 		animator.SetBool ("isRunFwd", false);
+		SoundController.instance.runSound.Stop ();
 	}
 
 }

@@ -3,47 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainCharacterController : MonoBehaviour {
+public class MainCharacterController : MonoBehaviour
+{
 
-	int keyCollected;
+	public int keyCollected;
+	public int bossKilled;
 	bool isDead;
 	Animator animator;
 	public int skinActive;
 	public bool isJumping = false;
 	private static MainCharacterController _mainCtrl;
-	int totalGold;
-	int currentGold;
+	public int totalGold;
+	public int currentGold;
+	public int chestCollected;
+
 	public static MainCharacterController MainCtrl {
 		get { 
 			return _mainCtrl;
 		}
 	}
 
-	void Awake() {
+	void Awake ()
+	{
 		if (_mainCtrl != null) {
 			Destroy (this.gameObject);
 		}
 		_mainCtrl = this;
-		LoadAnimation (skinActive);
+		skinActive = PlayerPrefs.GetInt ("skinActive");
 	}
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		loadResult ();
 		animator = gameObject.GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	void LoadAnimation(int skinActive) {
-//		if (skinActive == 1) {
-//			this.gameObject.transform.GetChild(0).GetComponent<Animator>().
-//		}
-	}
-
-	void OnCollisionEnter2D(Collision2D col){
+	void OnCollisionEnter2D (Collision2D col)
+	{
 		string tagName = col.gameObject.tag;
 		if (tagName.Equals ("Ground")) {
 			isJumping = false;
@@ -53,31 +49,45 @@ public class MainCharacterController : MonoBehaviour {
 			if (keyCollected != 5) {
 				Die ();
 			} else {
+				submitResult ();
+				PlayerPrefs.SetInt ("isGoBossScene", 1);
+				PlayerPrefs.Save ();
 				SceneManager.LoadScene ("BossScene");
 			}
 		} else if (col.gameObject.name.Equals ("Chest")) {
 			currentGold += 5000;
+			chestCollected++;
 			EndGame (true);
 		}
-	}
 
-	void OnCollisionExit2D(Collision2D col) {
-		string tagName = col.gameObject.tag;
-		if (tagName.Equals("Ground")){
-			isJumping = true;
+		if (col.gameObject.name.Equals ("GroundUp8")) {
+			gameObject.transform.SetParent (col.gameObject.transform);
 		}
 	}
 
-	void OnCollisionStay2D(Collision2D col){
+	void OnCollisionExit2D (Collision2D col)
+	{
+		string tagName = col.gameObject.tag;
+		if (tagName.Equals ("Ground")) {
+			isJumping = true;
+		}
+		if (col.gameObject.name.Equals ("GroundUp8")) {
+			gameObject.transform.SetParent (null);
+		}
+	}
+
+	void OnCollisionStay2D (Collision2D col)
+	{
 		string tagName = col.gameObject.tag;
 		if (tagName.Equals ("Ground")) {
 			isJumping = false;
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D col) {
+	void OnTriggerEnter2D (Collider2D col)
+	{
 		string tagName = col.gameObject.tag;
-		if (tagName.Equals ("RockTrapDead") || tagName.Equals ("Piranha")) {
+		if (tagName.Equals ("RockTrapDead") || tagName.Equals ("Piranha") || tagName.Equals ("DeadPoint")) {
 			Die ();
 		} else if (col.name.Equals ("ActivePoint")) {
 			col.gameObject.transform.parent.GetComponent<Rigidbody2D> ().gravityScale = (float)0.5;
@@ -90,29 +100,56 @@ public class MainCharacterController : MonoBehaviour {
 		}
 	}
 
-	void Die(){
+	void Die ()
+	{
 		isDead = true;
 		animator.SetBool ("isDead", true);
 		animator.SetBool ("isIdle", false);
 		animator.SetBool ("isRunFwd", false);
 		animator.SetBool ("isJump", false);
+		SoundController.instance.PlayDieSound ();
 		EndGame (false);
 	}
 
-	void EndGame(bool isWin){
-		//Time.timeScale = 0;
-		Debug.Log("EndGame");
+	void EndGame (bool isWin)
+	{
+		Time.timeScale = 0;
+		UIController.instance.ShowPanelWin ();
+		if (isWin) {
+			ResultUI.instance.ShowWinResult ();
+		} else {
+			ResultUI.instance.ShowFailedResult ();
+		}
+		ResultUI.instance.PointKeys.text = keyCollected.ToString ();
+		ResultUI.instance.TCoin.text = currentGold.ToString ();
+		ResultUI.instance.PointSkull.text = bossKilled.ToString ();
 		submitResult ();
+
 	}
 
-	void loadResult() {
+	void loadResult ()
+	{
 		if (PlayerPrefs.HasKey ("totalGold")) {
 			totalGold = PlayerPrefs.GetInt ("totalGold");
 		}
 	}
 
-	void submitResult() {
+	void submitResult ()
+	{
+		Debug.Log (totalGold);
 		totalGold += currentGold;
 		PlayerPrefs.SetInt ("totalGold", totalGold);
+		PlayerPrefs.SetInt ("bossKill", PlayerPrefs.GetInt ("bossKill") + bossKilled);
+		PlayerPrefs.SetInt ("keyCollected", PlayerPrefs.GetInt ("keyCollected") + keyCollected);
+		PlayerPrefs.SetInt ("chestCollected", PlayerPrefs.GetInt ("chestCollected") + chestCollected);
+		PlayerPrefs.Save ();
+		Debug.Log (PlayerPrefs.GetInt ("totalGold") + "-");
+	}
+
+	public void RestartGame ()
+	{
+		PlayerPrefs.SetInt ("isRestart", 1);
+		PlayerPrefs.Save ();
+		SceneManager.LoadScene ("GameScene");
 	}
 }

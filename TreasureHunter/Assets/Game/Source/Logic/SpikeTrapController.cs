@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeTrapController : MonoBehaviour {
+public class SpikeTrapController : MonoBehaviour
+{
 	
 	bool isBottomLimit;
 	bool isTopLimit = true;
@@ -14,12 +15,14 @@ public class SpikeTrapController : MonoBehaviour {
 	public float bottomLimit;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		fallingSpeed = new Vector2 (0, (float)0.2);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		checkLimit ();
 		if (isAuto) {
 			if (isTopLimit) {
@@ -30,7 +33,8 @@ public class SpikeTrapController : MonoBehaviour {
 		}
 	}
 
-	void checkLimit() {
+	void checkLimit ()
+	{
 		Vector2 pos = this.gameObject.transform.localPosition;
 		if (this.gameObject.transform.localPosition.y < bottomLimit) {
 			isBottomLimit = true;

@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class ResultUI : MonoBehaviour {
+
+public class ResultUI : MonoBehaviour
+{
 
 	// Use this for initialization
 	static ResultUI _instance;
-	public static ResultUI instance{	
-		get{ 
+
+	public static ResultUI instance {	
+		get { 
 			return _instance;
 		}
 	}
-	void Awake(){
+
+	void Awake ()
+	{
 		if (_instance != null) {
 			Destroy (this.gameObject);
 		}
-		_instance = this;	
+		_instance = this;
 	}
+
 	public Button BtnHome;
 	public Button BtnPlay;
 	public Button BtnRestart;
@@ -39,30 +45,36 @@ public class ResultUI : MonoBehaviour {
 	public Text PointSkull;
 	public Text SkullKill;
 
-	public void ShowWinResult(){
+	public void ShowWinResult ()
+	{
 		BtnPlay.interactable = false;
 		FailCrown.gameObject.SetActive (false);
-
 		ResultText.text = "WIN";
-
 	}
 
-	public void ShowFailedResult(){
+	public void ShowFailedResult ()
+	{
 		FailCrown.gameObject.SetActive (true);
 		ResultText.text = "FAILED";
 	}
 
-	public void ButtonHome(){
+	public void ButtonHome ()
+	{
 		UIController.instance.ShowHomeUI ();
 	}
 
-	public void ButtonRestart(){
-		SceneManager.LoadScene ("GameScene");
+	public void ButtonRestart ()
+	{
+		MainCharacterController.MainCtrl.RestartGame ();
 	}
-	public void ButtonShare(){
+
+	public void ButtonShare ()
+	{
 		
 	}
-	public void ButtonExit(){
+
+	public void ButtonExit ()
+	{
 		Application.Quit ();
 	}
 }

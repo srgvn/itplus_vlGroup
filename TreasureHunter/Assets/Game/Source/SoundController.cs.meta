@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 602b337ad8c2b6546bdac9f60ecec220
+timeCreated: 1522466182
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - titleMusic: {instanceID: 0}
+  - gameMusic: {instanceID: 0}
+  - buttonAudio: {instanceID: 0}
+  - dieEffect: {fileID: 8300000, guid: 51349a84c2348254488a4e6d5c96a191, type: 3}
+  - jumpEffect: {fileID: 8300000, guid: 2e11844ba0912224bab53dc023bbd484, type: 3}
+  - runEffect: {fileID: 8300000, guid: 93fa454403c764c4a96ca9a35f9e3087, type: 3}
+  - lightningEffect: {fileID: 8300000, guid: dbfce7337e25bae4c9dbe37207a4f04b, type: 3}
+  - endMusic: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

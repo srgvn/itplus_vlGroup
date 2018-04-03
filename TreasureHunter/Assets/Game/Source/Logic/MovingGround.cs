@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingGround : MonoBehaviour {
+public class MovingGround : MonoBehaviour
+{
 	public GameObject leftLimit;
 	public GameObject rightLimit;
 
@@ -10,13 +11,15 @@ public class MovingGround : MonoBehaviour {
 	bool isRightLimit;
 	private Vector2 moveSpeed;
 	// Use this for initialization
-	void Start () {
-		moveSpeed = new Vector2 (2, 0);
+	void Start ()
+	{
+		moveSpeed = new Vector2 (5, 0);
 		isLeftLimit = true;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		if (isLeftLimit) {
 			gameObject.transform.Translate (moveSpeed * Time.deltaTime);
 		} else if (isRightLimit) {
@@ -24,7 +27,8 @@ public class MovingGround : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D col) {
+	void OnTriggerEnter2D (Collider2D col)
+	{
 		if (col.gameObject.name.Equals (leftLimit.name)) {
 			isLeftLimit = true;
 			isRightLimit = false;

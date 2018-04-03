@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingTrapController : MonoBehaviour {
+public class FallingTrapController : MonoBehaviour
+{
 	bool isBottomLimit;
 	bool isTopLimit = true;
 	Vector2 fallingSpeed;
 	public bool isOdd;
 	// Use this for initialization
-	void Start () {
-		fallingSpeed = new Vector2 (0, 2);
+	void Start ()
+	{
+		fallingSpeed = new Vector2 (0, 3);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		checkLimit ();
 		if (isTopLimit) {
 			this.gameObject.transform.Translate (-fallingSpeed * Time.deltaTime);
@@ -22,7 +25,8 @@ public class FallingTrapController : MonoBehaviour {
 		}
 	}
 
-	void checkLimit() {
+	void checkLimit ()
+	{
 		Vector2 pos = this.gameObject.transform.localPosition;
 		if (this.gameObject.transform.localPosition.y < -1.1) {
 			isBottomLimit = true;

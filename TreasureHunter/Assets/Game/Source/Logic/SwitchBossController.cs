@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchBossController : MonoBehaviour {
+public class SwitchBossController : MonoBehaviour
+{
 
 	public Sprite switchOn;
 	public Sprite switchOff;
 	public GameObject disappearObj;
 	bool isOn;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
-	void OnCollisionEnter2D(Collision2D col){
+	void OnCollisionEnter2D (Collision2D col)
+	{
 		string name = gameObject.name;
-		if (col.gameObject.name.Equals ("Player")) {
+		if (col.gameObject.tag.Equals ("Player")) {
 			if (!isOn) {
 				gameObject.GetComponent<SpriteRenderer> ().sprite = switchOn;
 				isOn = true;
@@ -35,17 +29,18 @@ public class SwitchBossController : MonoBehaviour {
 		} else if (name.Equals ("Switch4")) {
 			BossController.Instance.isSwitch4On = true;
 			if (BossController.Instance.isSwitch1On && BossController.Instance.isSwitch2On && BossController.Instance.isSwitch3On) {
-				BossController.Instance.HealthDown ();
 				resetSwitch ();
+				BossController.Instance.HealthDown ();
 			}
 		}
 
 	}
 
-	IEnumerator SwitchOnAction(){
+	IEnumerator SwitchOnAction ()
+	{
 		yield return new WaitForSeconds ((float)0.5);
 		disappearObj.SetActive (false);
-		gameObject.GetComponent<SpriteRenderer>().enabled = false;
+		gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 		gameObject.GetComponent<Collider2D> ().isTrigger = true;
 		yield return new WaitForSeconds (1);
 		disappearObj.SetActive (true);
@@ -53,18 +48,19 @@ public class SwitchBossController : MonoBehaviour {
 		if (gameObject.name.Equals ("Switch4")) {
 			gameObject.GetComponent<SpriteRenderer> ().sprite = switchOff;
 			gameObject.GetComponent<Collider2D> ().isTrigger = false;
-			gameObject.GetComponent<SpriteRenderer>().enabled = true;
+			gameObject.GetComponent<SpriteRenderer> ().enabled = true;
 		}
 	}
 
-	void resetSwitch(){
+	void resetSwitch ()
+	{
 		BossController.Instance.isSwitch1On = false;
 		BossController.Instance.isSwitch2On = false;
 		BossController.Instance.isSwitch3On = false;
 		foreach (GameObject swt in GameObject.FindGameObjectsWithTag("SwitchBoss")) {
 			swt.GetComponent<SpriteRenderer> ().sprite = switchOff;
 			swt.GetComponent<Collider2D> ().isTrigger = false;
-			swt.GetComponent<SpriteRenderer>().enabled = true;
+			swt.GetComponent<SpriteRenderer> ().enabled = true;
 		}
 	}
 }

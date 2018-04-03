@@ -3,35 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameUI : MonoBehaviour {
+public class GameUI : MonoBehaviour
+{
 	static GameUI _instance;
-	public static GameUI instance{	
-		get{ 
+
+	public static GameUI instance {	
+		get { 
 			return _instance;
 		}
 	}
-	void Awake(){
+
+	void Awake ()
+	{
 		if (_instance != null) {
 			Destroy (this.gameObject);
 		}
-		_instance = this;	
+		_instance = this;
 	}
 
 
 	public Button BtnPause;
-	//private bool GameIsPaused;
-	// Use this for initialization
 
-	public void PauseGame(){
-		//GameIsPaused = !GameIsPaused;
-		//if (GameIsPaused) {
-			Time.timeScale = 0;
-			UIController.instance.ShowPanelPauseUI ();
-		//} else if (!GameIsPaused) {
-			
-			//Time.timeScale = 1;
-			 
-		//}
-	
+	public void PauseGame ()
+	{
+		Time.timeScale = 0;
+		UIController.instance.ShowPanelPauseUI ();
 	}
 }
